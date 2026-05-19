@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../services/api";
 
 function Signup() {
 
@@ -27,8 +27,8 @@ function Signup() {
 
         try {
 
-            const res = await axios.post(
-                "https://ai-complaint-backend-9088.onrender.com/api/auth/register",
+            const res = await API.post(
+                "/auth/register",
                 formData
             );
 
@@ -68,6 +68,7 @@ function Signup() {
                     <input
                         type="text"
                         name="name"
+                        value={formData.name}
                         placeholder="Enter Name"
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -76,6 +77,7 @@ function Signup() {
                     <input
                         type="email"
                         name="email"
+                        value={formData.email}
                         placeholder="Enter Email"
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -84,6 +86,7 @@ function Signup() {
                     <input
                         type="password"
                         name="password"
+                        value={formData.password}
                         placeholder="Enter Password"
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"

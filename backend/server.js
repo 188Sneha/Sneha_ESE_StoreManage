@@ -11,30 +11,34 @@ const aiRoutes = require("./routes/aiRoutes");
 const app = express();
 
 
-// Middleware
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://ai-complaint-frontend-zc7v.onrender.com"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+// ================= MIDDLEWARE =================
 
+// CORS FIX
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+};
+
+app.use(cors(corsOptions));
+
+// BODY PARSER
 app.use(express.json());
 
 
-// Database Connection
+// ================= DATABASE CONNECTION =================
+
 connectDB();
 
 
-// Home Route
+// ================= HOME ROUTE =================
+
 app.get("/", (req, res) => {
   res.send("AI Complaint Backend Running");
 });
 
 
-// Health Route
+// ================= HEALTH ROUTE =================
+
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
@@ -43,7 +47,8 @@ app.get("/api/health", (req, res) => {
 });
 
 
-// Complaint APIs
+// ================= COMPLAINT APIs =================
+
 app.use("/api/complaints", complaintRoutes);
 
 /*
@@ -53,7 +58,8 @@ PUT    /api/complaints/:id
 */
 
 
-// Authentication APIs
+// ================= AUTH APIs =================
+
 app.use("/api/auth", authRoutes);
 
 /*
@@ -62,7 +68,8 @@ POST   /api/auth/login
 */
 
 
-// AI APIs
+// ================= AI APIs =================
+
 app.use("/api/ai", aiRoutes);
 
 /*
@@ -70,7 +77,8 @@ POST   /api/ai/analyze
 */
 
 
-// Invalid Route Handling
+// ================= INVALID ROUTE =================
+
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -79,7 +87,8 @@ app.use((req, res) => {
 });
 
 
-// Server
+// ================= SERVER =================
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
