@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import ComplaintForm from "../components/ComplaintForm";
 import ComplaintList from "../components/ComplaintList";
@@ -11,7 +12,7 @@ function Home() {
   const [activeSection, setActiveSection] =
     useState("");
 
-  // AFTER REGISTRATION
+  // AFTER COMPLAINT SUBMIT
 
   const handleComplaintSubmit = () => {
 
@@ -28,6 +29,28 @@ function Home() {
       <h1 className="text-5xl font-bold text-center text-blue-700 mb-10">
         AI Complaint Management System
       </h1>
+
+      {/* AUTH BUTTONS */}
+
+      <div className="flex justify-center gap-5 mb-10">
+
+        <Link to="/signup">
+
+          <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl text-lg font-semibold">
+            Signup
+          </button>
+
+        </Link>
+
+        <Link to="/login">
+
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-lg font-semibold">
+            Login
+          </button>
+
+        </Link>
+
+      </div>
 
       {/* COMPLAINT FORM */}
 
